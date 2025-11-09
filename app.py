@@ -1,50 +1,32 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
+from model.classify.predict import predict_image
+from model.classify.eco_guide import get_eco_guide
 import os
-from model.classify.predict import classify_image
-from model.classify.room_cleaner import analyze_room
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
-# Create upload folder if it doesn't exist
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+UPLOAD_FOLDER = 'static/uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-@app.route('/classify', methods=['POST'])
-def classify():
-    if 'image' not in request.files:
-        return "No image uploaded", 400
+@app.route('/predict', methods=['POST'])
+def upload_and_predict():
+    file = request.files['image']
+    if file:
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(filepath)
+        label = predict_image(filepath)
+        suggestion = get_eco_guide(label)
+        return render_template('result.html', label=label, suggestion=suggestion, image_path=filepath)
+    return render_template('index.html', error="Please upload an image.")
 
-    image_file = request.files['image']
-    if image_file.filename == '':
-        return "No selected file", 400
-
-    image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_file.filename)
-    image_file.save(image_path)
-
-    # Use your existing classifier
-    result = classify_image(image_path)
-    return render_template('result.html', result=result, image_path=image_path)
-
-@app.route('/room', methods=['POST'])
-def room_analyze():
-    if 'image' not in request.files:
-        return "No image uploaded", 400
-
-    image_file = request.files['image']
-    if image_file.filename == '':
-        return "No selected file", 400
-
-    image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_file.filename)
-    image_file.save(image_path)
-
-    # Simulated detected items (we’ll automate later)
-    detected_items = ["clothes", "books", "trash"]
-    result = analyze_room(detected_items)
-    return render_template('room.html', result=result, image_path=image_path)
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
