@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSort ♻️</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 EcoSort AI</h1>
+        <p>Classify your waste or get cleaning ideas for your room!</p>
+
+        <form action="/classify" method="post" enctype="multipart/form-data" class="form-section">
+            <h3>♻️ Waste Classification</h3>
+            <input type="file" name="image" required>
+            <button type="submit">Classify Waste</button>
+        </form>
+
+        <form action="/room" method="post" enctype="multipart/form-data" class="form-section">
+            <h3>🧹 Room Analyzer</h3>
+            <input type="file" name="image" required>
+            <button type="submit">Analyze Room</button>
+        </form>
+    </div>
+</body>
+</html>
