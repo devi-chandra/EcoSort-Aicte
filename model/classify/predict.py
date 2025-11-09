@@ -11,3 +11,18 @@ def classify_image(img_path):
     prediction = model.predict(img_array)
     classes = ['recyclable', 'non-recyclable', 'wet', 'dry']
     return classes[np.argmax(prediction)]
+
+
+from eco_guide import get_eco_advice
+
+if __name__ == "__main__":
+    path = input("Enter the path of the image: ")
+    category, confidence = classify_image(path)
+    print("\n✨ Eco Advice ✨")
+    advice = get_eco_advice(category)
+    print("♻️ Reuse Ideas:")
+    for idea in advice["reuse"]:
+        print("-", idea)
+    print("\n🚮 Safe Disposal:")
+    for tip in advice["dispose"]:
+        print("-", tip)
