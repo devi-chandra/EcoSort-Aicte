@@ -1,24 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoSort Result</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>EcoSort Result</title>
+  <style>
+    body { font-family: 'Poppins', sans-serif; text-align: center; margin-top: 50px; }
+    img { width: 300px; border-radius: 10px; margin: 20px; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>♻️ Waste Classification Result</h1>
-
-        <img src="{{ image_path }}" alt="Uploaded Image" class="preview">
-
-        <div class="result-box">
-            <h2>{{ result['predicted_class'] }}</h2>
-            <p><strong>Confidence:</strong> {{ result['confidence'] }}%</p>
-            <p><strong>Suggestion:</strong> {{ result['suggestion'] }}</p>
-        </div>
-
-        <a href="/">⬅️ Back to Home</a>
-    </div>
+  <h1>Prediction: {{ label }}</h1>
+  <img src="{{ image_path }}" alt="Uploaded Image">
+  <p><strong>Eco Suggestion:</strong> {{ suggestion }}</p>
+  <a href="/">Go Back</a>
 </body>
 </html>
