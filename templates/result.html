@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSort Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>♻️ Waste Classification Result</h1>
+
+        <img src="{{ image_path }}" alt="Uploaded Image" class="preview">
+
+        <div class="result-box">
+            <h2>{{ result['predicted_class'] }}</h2>
+            <p><strong>Confidence:</strong> {{ result['confidence'] }}%</p>
+            <p><strong>Suggestion:</strong> {{ result['suggestion'] }}</p>
+        </div>
+
+        <a href="/">⬅️ Back to Home</a>
+    </div>
+</body>
+</html>
