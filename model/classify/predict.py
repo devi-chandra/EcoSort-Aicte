@@ -1,27 +1,17 @@
-import tensorflow as tf
 import numpy as np
 from tensorflow.keras.preprocessing import image
-import os
-from model.classify.eco_guide import eco_suggestions
+from tensorflow.keras.models import load_model
 
-# Load trained model
-model_path = "model/saved/ecosort_model.h5"
-model = tf.keras.models.load_model(model_path)
+# Load model only once to save time
+model = load_model('model/saved/eco_model.h5')
 
-# Class names (same as dataset folders)
-class_names = ["recyclable", "non-recyclable", "wet", "dry"]
+class_labels = ['Recyclable', 'Non-Recyclable', 'Wet', 'Dry']
 
-def classify_image(img_path):
-    img = image.load_img(img_path, target_size=(150, 150))
-    img_array = image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0) / 255.0
-
-    prediction = model.predict(img_array)
-    predicted_class = class_names[np.argmax(prediction)]
-    confidence = np.max(prediction) * 100
-
-    print(f"♻️ Predicted: {predicted_class} ({confidence:.2f}% confidence)")
-    print("💡 Suggestion:", eco_suggestions(predicted_class))
-
-# Example usage:
-# classify_image("dataset/test/recyclable/sample.jpg")
+def predict_image(img_path):
+    img = image.load_img(img_path, target_size=(128,128))
+    x = image.img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+    x = x / 255.0
+    prediction = model.predict(x)
+    result = class_labels[np.argmax(prediction)]
+    return result
