@@ -1,52 +1,8 @@
-# eco_guide.py
-def get_eco_advice(category):
-    advice = {
-        "recyclable": {
-            "reuse": [
-                "Turn old plastic bottles into planters or storage containers.",
-                "Reuse glass jars for organizing kitchen spices or stationery.",
-                "Donate usable items to recycling centers or NGOs."
-            ],
-            "dispose": [
-                "Rinse before recycling.",
-                "Separate from wet waste.",
-                "Drop at authorized recycling bins."
-            ]
-        },
-        "non-recyclable": {
-            "reuse": [
-                "Use old cloth for cleaning or DIY crafts.",
-                "Try to reduce buying such items in the future."
-            ],
-            "dispose": [
-                "Wrap safely and place in dry waste bins.",
-                "Avoid burning plastic or mixed waste."
-            ]
-        },
-        "wet": {
-            "reuse": [
-                "Use food leftovers for composting.",
-                "Use fruit and vegetable peels as fertilizer or DIY scrubs."
-            ],
-            "dispose": [
-                "Use a compost bin.",
-                "Keep separate from plastic or metal waste."
-            ]
-        },
-        "dry": {
-            "reuse": [
-                "Paper can be reused for notes or crafts.",
-                "Cardboard boxes can be used for storage."
-            ],
-            "dispose": [
-                "Send to dry waste collection center.",
-                "Avoid mixing with wet waste."
-            ]
-        }
+def eco_suggestions(category):
+    tips = {
+        "recyclable": "Clean and dry items before recycling. Try reusing jars, boxes, or bottles for storage or crafts.",
+        "non-recyclable": "Dispose safely in the right bin. Avoid burning; look for upcycling ideas before throwing away.",
+        "wet": "Turn into compost or feed it into a biogas unit. Keep it away from plastics to reduce contamination.",
+        "dry": "Reuse if possible. Keep papers or fabrics dry and send them to local recycling centers."
     }
-
-    category = category.lower()
-    if category in advice:
-        return advice[category]
-    else:
-        return {"reuse": ["No suggestion available."], "dispose": ["No disposal info found."]}
+    return tips.get(category, "No suggestion available for this category.")
