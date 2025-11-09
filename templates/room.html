@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🧹 Room Cleaning & Decor Suggestions</h1>
+
+        <img src="{{ image_path }}" alt="Uploaded Room Image" class="preview">
+
+        <div class="result-box">
+            <h2>Cleaning Tips:</h2>
+            <ul>
+                {% for tip in result['cleaning_tips'] %}
+                    <li>{{ tip }}</li>
+                {% endfor %}
+            </ul>
+
+            <h2>Decoration Ideas:</h2>
+            <ul>
+                {% for tip in result['decor_tips'] %}
+                    <li>{{ tip }}</li>
+                {% endfor %}
+            </ul>
+
+            <p class="bonus">💡 {{ result['bonus_idea'] }}</p>
+        </div>
+
+        <a href="/">⬅️ Back to Home</a>
+    </div>
+</body>
+</html>
