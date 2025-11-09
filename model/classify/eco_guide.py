@@ -1,8 +1,8 @@
-def eco_suggestions(category):
-    tips = {
-        "recyclable": "Clean and dry items before recycling. Try reusing jars, boxes, or bottles for storage or crafts.",
-        "non-recyclable": "Dispose safely in the right bin. Avoid burning; look for upcycling ideas before throwing away.",
-        "wet": "Turn into compost or feed it into a biogas unit. Keep it away from plastics to reduce contamination.",
-        "dry": "Reuse if possible. Keep papers or fabrics dry and send them to local recycling centers."
+def get_eco_guide(label):
+    guides = {
+        "Recyclable": "Rinse and sort items. Send them to your nearest recycling center. Try reusing jars or bottles creatively.",
+        "Non-Recyclable": "Dispose safely in non-recyclable bins. Avoid mixing with food waste. Look for eco-friendly alternatives.",
+        "Wet": "Use it for composting. Ideal for garden manure. Keep it separate from plastic and metal waste.",
+        "Dry": "Store and send for recycling. Items like plastic or glass can be repurposed for DIY home decor."
     }
-    return tips.get(category, "No suggestion available for this category.")
+    return guides.get(label, "Handle with care and dispose responsibly.")
